@@ -1,0 +1,35 @@
+﻿@model Sach
+@{
+    ViewData["Title"] = "Thêm sách";
+}
+<div class="section-head"><h3>Thêm sách mới</h3></div>
+
+<form asp-action="Create" method="post" class="pkhd-form">
+    <div asp-validation-summary="ModelOnly" class="loi"></div>
+
+    <p>
+        <label asp-for="MaTL"></label>
+        <select asp-for="MaTL" asp-items="ViewBag.MaTL"></select>
+    </p>
+    <p>
+        <label asp-for="TenSach"></label>
+        <input asp-for="TenSach" />
+        <span asp-validation-for="TenSach" class="loi"></span>
+    </p>
+    <p>
+        <label asp-for="Gia"></label>
+        <input asp-for="Gia" data-val-number="Giá phải là số" />
+        <span asp-validation-for="Gia" class="loi"></span>
+    </p>
+    <p>
+        <label asp-for="Anh"></label>
+        <input asp-for="Anh" placeholder="vd: Img_1.jpg" />
+        <span asp-validation-for="Anh" class="loi"></span>
+    </p>
+    <button type="submit">Create</button>
+    <a asp-controller="Home" asp-action="Index">Quay lại</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

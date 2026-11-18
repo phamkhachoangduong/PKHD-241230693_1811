@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Sach>
+@{
+    ViewData["Title"] = "Trang chủ";
+    ViewData["TieuDe"] = "Phạm Khắc Hoàng Dương";
+}
+<div class="banner"><img src="~/images/banner.jpg" alt="Banner" /></div>
+
+<div id="PKHD_NoiDung">
+    <partial name="PKHD_MainContent" model="Model" />
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('.menu a.theloai').on('click', function (e) {
+                e.preventDefault();                  
+                var id = $(this).data('id');
+
+                $('.menu li').removeClass('active');
+                $(this).parent().addClass('active');
+
+                $.ajax({
+                    url: '@Url.Action("PKHD_LocTheoTheLoai", "Home")',
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (html) {
+                        $('#PKHD_NoiDung').html(html);
+                    },
+                    error: function (xhr) {
+                        alert('Lỗi: ' + xhr.status);
+                    }
+                });
+            });
+        });
+    </script>
+}
